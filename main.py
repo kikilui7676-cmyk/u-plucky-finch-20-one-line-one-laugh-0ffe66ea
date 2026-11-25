@@ -1,20 +1,12 @@
 import os
+from pathlib import Path
 
-PURCHASE = "I bought a standing desk and now I just stand there,"
-PAYOFF = "procrastinating at a higher altitude."
+LINE = "I bought a smart lock. It locked me out, then texted my ex to come rescue me."
 
-PURCHASE = "I bought a standing desk and now I just stand there,"
-PAYOFF = "procrastinating at a higher altitude."
-LINE = " ".join([PURCHASE, PAYOFF])
-
-def main():
-    out_dir = os.environ["MAKEFUN_OUTPUT_DIR"]
-    target = os.path.join(out_dir, "entry.txt")
-    os.makedirs(out_dir, exist_ok=True)
-    with open(target, "w", encoding="utf-8") as out:
-        out.write(LINE)
-        out.write("\n")
-
+def main() -> None:
+    out_dir = Path(os.environ["MAKEFUN_OUTPUT_DIR"])
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / "entry.txt").write_text(LINE + "\n", encoding="utf-8")
 
 if __name__ == "__main__":
     main()
